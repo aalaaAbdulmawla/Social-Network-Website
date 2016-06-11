@@ -5,13 +5,15 @@ class ApplicationController < ActionController::Base
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, 
-    							:phone_num, :email, :password, :password_confirmation,
-    						    :gender, :birthdate, :hometown, :about, :marital_status,
-    							:avatar]
+    						    :email, :password, :password_confirmation,
+    							 :phone_num, :gender, 
+    							:birthdate, :avatar, 
+    						    :hometown, :marital_status, :about]
     devise_parameter_sanitizer.for(:account_update) << [:first_name, :last_name, 
-    							:phone_num, :email, :password_confirmation,
-    						    :gender, :birthdate, :hometown, :about, :marital_status,
-    							:avatar_cache, :remove_avatar, :avatar]
+    						    :email, :password, :password_confirmation,
+    							:current_password, :phone_num, :gender, 
+    							:birthdate, :remove_avatar, :avatar, :avatar_cache, 
+    						    :hometown, :marital_status, :about]
     devise_parameter_sanitizer.for(:sign_in) << [:email, :remember_me]
   end
 

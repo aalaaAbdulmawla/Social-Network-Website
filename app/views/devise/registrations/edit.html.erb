@@ -44,7 +44,7 @@
 
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.select :gender, options_for_select([["Select One", ""], "Male", "Female"]), :class => 'genForm_dropBox' %>
+    <%= f.select :gender, options_for_select([ current_user.gender, current_user.gender == "Male" ? "Female" : "Male"]), :class => 'genForm_dropBox' %>
   </div>
   
   <div class="field">
