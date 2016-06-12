@@ -1,0 +1,9 @@
+<%= @user.first_name %>
+
+<div class="follow">
+  <% if @user.followed_by?(current_user) && current_user.id != @user.id %>
+      <%= link_to "Unfollow", unfollow_user_path(@user) %>
+  <% elsif current_user.id != @user.id %>
+      <%= link_to "follow", follow_user_path(@user) %>
+  <% end %>
+</div>
