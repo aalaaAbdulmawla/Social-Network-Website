@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+	def friends
+		
+	end
+
+	def friends_requests
+		
+	end
+
 	def show
  		 @user = User.find(params[:id])
 	end
@@ -11,12 +19,13 @@ class UsersController < ApplicationController
 	      flash[:error] = "You cannot follow yourself."
 	    else
 	      current_user.follow(@user)
-	      RecommenderMailer.new_follower(@user).deliver if @user.notify_new_follower
-	      flash[:notice] = "You are now following #{@user.monniker}."
+	      #RecommenderMailer.new_follower(@user).deliver if @user.notify_new_follower
+	      flash[:notice] = "A friend request has been sent to #{@user.first_name}."
 	    end
 	  else
 	    flash[:error] = "You must <a href='/users/sign_in'>login</a> to follow #{@user.monniker}.".html_safe
 	  end
+	  redirect_to :back
 	end
 
 	def unfollow
@@ -24,9 +33,10 @@ class UsersController < ApplicationController
 
 	  if current_user
 	    current_user.stop_following(@user)
-	    flash[:notice] = "You are no longer following #{@user.monniker}."
+	    flash[:notice] = "You are no longer following #{@user.first_name}."
 	  else
-	    flash[:error] = "You must <a href='/users/sign_in'>login</a> to unfollow #{@user.monniker}.".html_safe
+	    flash[:error] = "You must <a href='/users/sign_in'>login</a> to unfollow #{@user.first_name}.".html_safe
 	  end
+	  redirect_to :back
 	end
 end

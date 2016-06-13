@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  resources :users, only: [:show]
+  devise_for :users
   resources :users do
     member do
       get :follow
       get :unfollow
+      get :show
+      get :friends
+      get :friends_requests
     end
   end
-  devise_for :users
   root 'home#front'
 
   
