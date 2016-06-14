@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
+  def self.find_friends (user)
+    friends =  Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.follower_id = #{user.id} AND users.id != #{user.id}  AND follows.blocked = 'f' AND follows.status = 0")+
+               Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 0")
+    
+  end
   
 
 end

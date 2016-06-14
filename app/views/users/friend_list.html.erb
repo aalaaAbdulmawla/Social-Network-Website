@@ -1,0 +1,13 @@
+<table class="table table-striped">
+  <% @frnds.each do |friend| %>
+    <tr>
+    	<td id="profile-pic"><%= link_to image_tag((User.find(friend.id)).avatar_url, 
+    							:title => friend.first_name.capitalize, 
+    							:alt => friend.first_name.capitalize), 
+    							user_path(friend)%>
+         </td>
+        <td><%= link_to truncate(friend.first_name.capitalize + " " + friend.last_name.capitalize, :length => 16), user_path(friend) %></td>
+    	<td> <%= link_to "Unfriend", unfollow_user_path(User.find(friend.id)), :class => "btn btn-danger" %> </td>
+    <tr>
+  <% end %>
+</table>

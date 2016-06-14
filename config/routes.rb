@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :users do
-    member do
-      get :follow
-      get :unfollow
-      get :show
-      get :friends
-      get :friends_requests
-    end
-  end
   root 'home#front'
+  devise_for :users
+
+  resources :users do
+      get "follow" ,:on => :member
+      get "unfollow",:on => :member
+      get "show", :on => :member
+      get "friend_list", :on => :collection    
+  end
+  
+  
 
   
 

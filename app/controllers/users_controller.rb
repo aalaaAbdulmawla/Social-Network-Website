@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-	def friends
-		
+	def friend_list
+		@frnds =  User.find_friends(current_user)
 	end
 
 	def friends_requests

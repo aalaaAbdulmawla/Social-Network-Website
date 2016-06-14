@@ -1,7 +1,7 @@
 <div class="follow">
   <% if @user.followed_by?(current_user) && current_user.id != @user.id %>
-      <%= link_to "Unfollow", unfollow_user_path(@user) %>
+      <%= link_to "Unfriend", unfollow_user_path(@user), :class => "btn btn-danger" %>
   <% elsif current_user.id != @user.id %>
-      <%= link_to "follow", follow_user_path(@user) %>
+      <%= link_to "Send Friend Request", follow_user_path(@user), :class => "btn btn-default" %>
   <% end %>
 </div>

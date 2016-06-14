@@ -2,13 +2,12 @@
   <div class="navbar-inner">
     <div class="container">
  
-      <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">SNW</a>
+      <%= link_to "SNW", root_path, :class => "brand"%>
       <ul class="nav">
         <li class="active">
           <%= link_to "Home", root_path%>
         </li>
-        <li><a href="#">Friends</a></li>
+        <li><%= link_to "Friends",  :controller => :users, :action => :friend_list%></li>
         <li><a href="#">Friends Requests</a></li>
         <li><%= link_to "Edit Profile", edit_user_registration_path %> </li>
         <li><a href="#">Notifications</a></li>
