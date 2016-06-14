@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SNW</title>
+  <title>SNW</title>  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <%if user_signed_in? %>
+   <%= render 'layouts/header_signed_in'%>
    <strong> <%= current_user.email %> </strong>
    <%= link_to "Edit Profile", edit_user_registration_path %> 
    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
   <%else%>
+   <%= render 'layouts/header_not_signed_in'%>
    <%= link_to "Sign_up", new_user_registration_path %> 
    <%= link_to "Login", new_user_session_path %>
   <%end%>
+</head>
+<body>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+ 
+<div class="container">
+  <%= yield %>
+</div>
 
-<%= yield %>
+<%= render 'layouts/footer'%>
 
 </body>
 </html>

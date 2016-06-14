@@ -1,0 +1,8 @@
+input[type="password"], input[type="email"], input[type="text"]{
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.devise-actions{
+	margin-top: 5px;
+}

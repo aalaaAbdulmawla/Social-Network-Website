@@ -1,0 +1,39 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+ 
+      <!-- Be sure to leave the brand out there if you want it shown -->
+      <a class="brand" href="#">SNW</a>
+      <ul class="nav">
+        <li class="active">
+          <%= link_to "Home", root_path%>
+        </li>
+        <li><a href="#">Friends</a></li>
+        <li><a href="#">Friends Requests</a></li>
+        <li><%= link_to "Edit Profile", edit_user_registration_path %> </li>
+        <li><a href="#">Notifications</a></li>
+      </ul>
+
+
+ 
+        <form class="navbar-form pull-left" id="navBarSearchForm">
+          <input type="text" class="span2" placeholder="Search">
+        </form>
+
+       <ul class="nav navbar-nav navbar-right">     
+          <li id="profile-pic"><%= link_to image_tag(current_user.avatar_url, :title => current_user.first_name.capitalize, :alt => current_user.first_name.capitalize), url_for(current_user),
+          :html=>{:width=>10, :height => 10} %>
+          </li>
+          <li><%= link_to truncate(current_user.first_name, :length => 16), current_user %></li>
+          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+        </ul>
+ 
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+
+
+
+</style>
