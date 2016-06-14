@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       get "follow" ,:on => :member
       get "unfollow",:on => :member
       get "show", :on => :member
-      get "friend_list", :on => :collection    
+      get "friend_list", :on => :collection   
+      get "friend_requests", :on => :collection 
+      get "accept_friend", :on => :collection
   end
   
   

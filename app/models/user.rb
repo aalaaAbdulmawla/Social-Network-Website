@@ -23,9 +23,25 @@ class User < ActiveRecord::Base
   acts_as_followable
 
   def self.find_friends (user)
-    friends =  Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.follower_id = #{user.id} AND users.id != #{user.id}  AND follows.blocked = 'f' AND follows.status = 0")+
-               Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 0")
+    friends =  Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.follower_id = #{user.id} AND users.id != #{user.id}  AND follows.blocked = 'f' AND follows.status = 1")+
+               Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 1")
     
+  end
+
+  def self.find_friend_requests(user)
+    Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 0")
+  end
+
+  def self.count_friend_requests(user)
+      find_friend_requests(user).count
+  end
+
+  def self.reject_friend(sender, recevier)
+    Follow.destroy_all(:follower_id => sender.id, :followable_id => recevier.id)
+  end
+
+  def self.accept_friend(sender, recevier)
+    Follow.find_by_sql("UPDATE follows SET status = 1 WHERE follower_id = #{sender.id} AND followable_id = #{recevier.id}")
   end
   
 

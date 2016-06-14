@@ -7,8 +7,8 @@
     							user_path(friend)%>
          </td>
         <td><%= link_to truncate(friend.first_name.capitalize + " " + friend.last_name.capitalize, :length => 16), user_path(friend) %></td>
-    	<td> <%= link_to "Unfriend", unfollow_user_path(User.find(friend.id)), :class => "btn btn-danger" %> </td>
+      <td> <%= link_to "Accept", :controller => "users", :action => "accept_friend", :user => friend.id, :class => "btn btn-success" %> </td>
+    	<td> <%= link_to "Reject", unfollow_user_path(User.find(friend.id)), :class => "btn btn-danger" %> </td>
     <tr>
   <% end %>
 </table>
-

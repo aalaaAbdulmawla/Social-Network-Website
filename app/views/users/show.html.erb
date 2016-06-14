@@ -6,4 +6,4 @@
   <% end %>
 </div>
 <%= link_to "Edit Profile", edit_user_registration_path(current_user), :class => "btn btn-default" %>
-<li><%= link_to "Friends",  :controller => :users, :action => :friend_list%></li>
+<%= link_to "Friends",  :controller => :users, :action => :friend_list, :class => "btn btn-default"%>
