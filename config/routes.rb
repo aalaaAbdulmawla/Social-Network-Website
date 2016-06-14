@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'home#front'
-  devise_for :users
-
-  resources :users do
+  
+  devise_for :users, :path_prefix => 'my'
+  resources :users, :only => [:follow, :unfollow, :show, :friend_list] do
       get "follow" ,:on => :member
       get "unfollow",:on => :member
       get "show", :on => :member
