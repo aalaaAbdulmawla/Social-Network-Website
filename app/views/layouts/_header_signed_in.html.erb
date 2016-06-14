@@ -7,7 +7,8 @@
         <li class="active">
           <%= link_to "Home", root_path%>
         </li>
-        <li><%= link_to "(#{User.count_friend_requests(current_user)}) Friends Requests", :controller => "users", :action=>"friend_requests"%></li>
+        <li><%= link_to "(#{User.count_friend_requests(current_user)}) Friends Requests", friend_requests_users_path%></li>
+        <li><%= link_to "Friends",  friend_list_users_path%></li>
         <li><a href="#">Notifications</a></li>
       </ul>
 

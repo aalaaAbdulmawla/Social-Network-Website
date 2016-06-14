@@ -1,9 +1,12 @@
-<div class="follow">
-  <% if @user.followed_by?(current_user) && current_user.id != @user.id %>
-      <%= link_to "Unfriend", unfollow_user_path(@user), :class => "btn btn-danger" %>
-  <% elsif current_user.id != @user.id %>
-      <%= link_to "Send Friend Request", follow_user_path(@user), :class => "btn btn-default" %>
-  <% end %>
+<div class="col-md-8 col-md-offset-2">
+  <h2 class="text-center">Lessa 7an3adel el profile</h2>
+	<div class="follow">
+	  <% if @user.followed_by?(current_user) && current_user.id != @user.id %>
+	      <%= link_to "Unfriend", unfollow_user_path(@user), :class => "btn btn-danger" %>
+	  <% elsif current_user.id != @user.id %>
+	      <%= link_to "Send Friend Request", follow_user_path(@user), :class => "btn btn-default" %>
+	  <% end %>
+	</div>
+	<%= link_to "Edit Profile", edit_user_registration_path(current_user), :class => "btn btn-default" %>
+	<%= link_to "Friends",  :controller => :users, :action => :friend_list, :class => "btn btn-default"%>
 </div>
-<%= link_to "Edit Profile", edit_user_registration_path(current_user), :class => "btn btn-default" %>
-<%= link_to "Friends",  :controller => :users, :action => :friend_list, :class => "btn btn-default"%>

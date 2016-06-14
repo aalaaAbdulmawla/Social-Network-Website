@@ -22,6 +22,19 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
+  after_create :set_default_avatar
+  after_update :set_default_avatar
+
+  def set_default_avatar
+    if (avatar_url.nil? and gender == "Male")
+      avatar_url = "assets/images/male.PNG"
+      puts("***one\n\n")
+    elsif (avatar_url.nil? and gender == "Female")
+      avatar_url = "assets/images/female.PNG"
+      puts("***two\n\n")
+    end
+  end
+
   def self.find_friends (user)
     friends =  Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.follower_id = #{user.id} AND users.id != #{user.id}  AND follows.blocked = 'f' AND follows.status = 1")+
                Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 1")
