@@ -27,7 +27,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    acts_as_follower (0.2.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.10-x64-mingw32)
     builder (3.2.2)
@@ -137,7 +136,6 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  acts_as_follower
   carrierwave
   coffee-rails (~> 4.0.0)
   devise

@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'carrierwave'
 gem 'devise'
-gem "acts_as_follower"
+#gem "acts_as_follower"
 gem "twitter-bootstrap-rails"
 
 # Use ActiveModel has_secure_password

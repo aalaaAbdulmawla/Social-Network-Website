@@ -1,14 +1,24 @@
 Rails.application.routes.draw do
   root 'home#front'
+  resources :friendables do
+      get 'friend_request', :on => :member
+      get 'friend_request_accept', :on => :member
+      get 'friend_request_reject', :on => :member
+      get "friend_list", :on => :collection   
+      get "friend_requests", :on => :collection 
+      get "unfriend" , :on => :member
+  end
+
+  
   
   devise_for :users, :path_prefix => 'my'
   resources :users, :only => [:follow, :unfollow, :show, :friend_list, :friend_requests, :accept_friend] do
-      get "follow" ,:on => :member
-      get "unfollow",:on => :member
+      # get "follow" ,:on => :member
+      # get "unfollow",:on => :member
       get "show", :on => :member
-      get "friend_list", :on => :collection   
-      get "friend_requests", :on => :collection 
-      get "accept_friend", :on => :collection
+      # get "friend_list", :on => :collection   
+      # get "friend_requests", :on => :collection 
+      # get "accept_friend", :on => :collection
   end
   
   

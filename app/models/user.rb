@@ -18,10 +18,9 @@ class User < ActiveRecord::Base
   validates :phone_num, allow_blank:true, numericality: { only_integer: true },
                  :length => { :maximum => 15 }
 
-
-  acts_as_follower
-  acts_as_followable
-
+  has_many :friendables
+  has_many :users, through: :friendables
+  
   after_create :set_default_url!
   # around_update :set_default_url!
 
@@ -31,27 +30,40 @@ class User < ActiveRecord::Base
     # User.find_by_sql("UPDATE users SET avatar = #{url.to_s} WHERE user.id = id")
   end
 
-  def self.find_friends (user)
-    friends =  Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.follower_id = #{user.id} AND users.id != #{user.id}  AND follows.blocked = 'f' AND follows.status = 1")+
-               Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 1")
+  def self.is_friend(user_1, user_2)
+      friends = Friendable.find_by_sql("SELECT * FROM users where id IN ( SELECT to_id FROM friendables WHERE friendables.from_id = #{user_1.id} AND friendables.to_id =#{user_2.id}  AND accepted = 1 )")+
+               Friendable.find_by_sql("SELECT * FROM users where id IN ( SELECT from_id FROM friendables WHERE friendables.from_id = #{user_2.id} AND friendables.to_id = #{user_1.id} AND accepted = 1 )")
+     (friends.count == 0)? false : true
+  end
+
+  def self.has_sent_request(user_1, user_2)
+      friends =  Friendable.find_by_sql("SELECT * FROM users where id IN ( SELECT to_id FROM friendables WHERE friendables.from_id = #{user_1.id} AND friendables.to_id = #{user_2.id} AND accepted = 0 )")
+      puts("\n\n count = #{friends.count} \n\n")
+      (friends.count == 0)? false : true
+
+  end
+
+  # def self.find_friends (user)
+  #   friends =  Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.follower_id = #{user.id} AND users.id != #{user.id}  AND follows.blocked = 'f' AND follows.status = 1")+
+  #              Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 1")
     
-  end
+  # end
 
-  def self.find_friend_requests(user)
-    Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 0")
-  end
+  # def self.find_friend_requests(user)
+  #   Follow.find_by_sql("SELECT * FROM follows, users  WHERE follows.followable_id = #{user.id} AND users.id != #{user.id} AND follows.blocked = 'f' AND follows.status = 0")
+  # end
 
-  def self.count_friend_requests(user)
-      find_friend_requests(user).count
-  end
+  # def self.count_friend_requests(user)
+  #     find_friend_requests(user).count
+  # end
 
-  def self.reject_friend(sender, recevier)
-    Follow.destroy_all(:follower_id => sender.id, :followable_id => recevier.id)
-  end
+  # def self.reject_friend(sender, recevier)
+  #   Follow.destroy_all(:follower_id => sender.id, :followable_id => recevier.id)
+  # end
 
-  def self.accept_friend(sender, recevier)
-    Follow.find_by_sql("UPDATE follows SET status = 1 WHERE follower_id = #{sender.id} AND followable_id = #{recevier.id}")
-  end
+  # def self.accept_friend(sender, recevier)
+  #   Follow.find_by_sql("UPDATE follows SET status = 1 WHERE follower_id = #{sender.id} AND followable_id = #{recevier.id}")
+ # end
   
 
 end
