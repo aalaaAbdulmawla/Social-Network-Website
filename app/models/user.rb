@@ -22,17 +22,13 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
-  after_create :set_default_avatar
-  after_update :set_default_avatar
+  after_create :set_default_url!
+  # around_update :set_default_url!
 
-  def set_default_avatar
-    if (avatar_url.nil? and gender == "Male")
-      avatar_url = "assets/images/male.PNG"
-      puts("***one\n\n")
-    elsif (avatar_url.nil? and gender == "Female")
-      avatar_url = "assets/images/female.PNG"
-      puts("***two\n\n")
-    end
+  def set_default_url!
+    url = ImageUploader.default_url(gender)
+    update!(avatar: url)
+    # User.find_by_sql("UPDATE users SET avatar = #{url.to_s} WHERE user.id = id")
   end
 
   def self.find_friends (user)

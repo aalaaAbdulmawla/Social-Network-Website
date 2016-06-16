@@ -16,6 +16,16 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  def self.default_url(gender)
+    if (gender == "Male")
+      #ActionController::Base.helpers.asset_path("images/fallback/#{gender.downcase}.PNG")
+      ActionController::Base.helpers.asset_path("/assets" + ['version_name', "male.PNG"].compact.join('_'))
+    else
+      #ActionController::Base.helpers.asset_path("images/fallback/#{gender.downcase}.PNG")
+      ActionController::Base.helpers.asset_path("/assets" + ['version_name', "female.png"].compact.join('_'))
+    end
+  end
+
   #Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
