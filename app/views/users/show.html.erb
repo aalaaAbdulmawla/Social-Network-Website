@@ -1,7 +1,7 @@
 <div class="row">
    <div class="col-md-4">
    	<div class = "picture_frame">
-  	<%= link_to image_tag(@user.avatar_url, :title => @user.first_name.capitalize, :alt => @user.first_name.capitalize), url_for(@user),
+  	<%= link_to image_tag(default_img(@user), :title => @user.first_name.capitalize, :alt => @user.first_name.capitalize), url_for(@user),
           :html=>{:class => "user_avatar"} %>
     </div>
 	<% if User.is_friend(current_user, @user) && current_user.id != @user.id %>
