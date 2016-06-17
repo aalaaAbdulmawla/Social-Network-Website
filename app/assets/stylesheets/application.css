@@ -14,6 +14,17 @@
  *= require_self
 
  */
+   #navBarSearchForm input[type=text]{
+   	width:430px !important; 
+   	height:30px !important;
+   	padding-top: 0 !important;
+    margin-top: 0 !important;
+   }
+
+   #navBarSearchForm input[type=submit]{
+   	height:30px !important;
+   	margin-bottom: 7px;
+   }
 
   .nav  li  a  img{
     width: 20px;
@@ -23,12 +34,8 @@
   hr.style1{
 		border-top: 1px solid #8c8b8b;
 	}
-
-
-
-   #navBarSearchForm input[type=text]{width:430px !important;}
-
-  body{
+   
+   body{
     margin-top: 0;
     padding-top: 0;
   }

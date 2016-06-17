@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search/index'
+
   resources :posts do 
     member do
       put "like", to: "posts#upvote"

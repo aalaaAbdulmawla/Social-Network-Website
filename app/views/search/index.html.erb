@@ -1,0 +1,9 @@
+<h3>Users</h3>
+<% @users.each do |user|%>
+	<%= user.first_name + ' ' +user.last_name %>
+<% end %>
+</hr>
+<h3>Posts</h3>
+<% @posts.each do |post| %>
+	<%= post.content%>
+<% end %>
