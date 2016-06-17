@@ -1,14 +1,85 @@
-<div class="col-md-8 col-md-offset-2">
-  <h2 class="text-center">Lessa 7an3adel el profile</h2>
-	<div class="follow">
-	  <% if User.is_friend(current_user, @user) && current_user.id != @user.id %>
-	      <%= link_to "Unfriend", :controller => "friendables", :action => "unfriend", :id => @user.id, :class => "btn btn-danger" %>
-	  <% elsif User.has_sent_request(current_user, @user) && current_user.id != @user.id %>
-	      <%= link_to "Delete Friend Request", :controller => "friendables", :action => "unfriend", :id => @user.id, :class => "btn btn-danger" %>
-	   <% elsif current_user.id != @user.id %>
-	      <%= link_to "Send Friend Request", friend_request_friendable_path(@user), :class => "btn btn-default" %>
-	  <% end %>
+<div class="row">
+   <div class="col-md-4">
+   	<div class = "picture_frame">
+  	<%= link_to image_tag(@user.avatar_url, :title => @user.first_name.capitalize, :alt => @user.first_name.capitalize), url_for(@user),
+          :html=>{:class => "user_avatar"} %>
+    </div>
+	<% if User.is_friend(current_user, @user) && current_user.id != @user.id %>
+	      <%= link_to "Unfriend", :controller => "friendables", :action => "unfriend", :id => @user.id, :class => "btn btn-danger btn-lg btn-block" %>
+	<% elsif User.has_sent_request(current_user, @user) && current_user.id != @user.id %>
+	      <%= link_to "Delete Friend Request", :controller => "friendables", :action => "unfriend", :id => @user.id, :class => "btn btn-danger btn-lg btn-block" %>
+	<% elsif current_user.id != @user.id %>
+	    <%= link_to "Send Friend Request", friend_request_friendable_path(@user), :class => "btn btn-default btn-lg btn-block" %>
+	<% end %>
+	<br>
+	</hr>
+	<% if current_user.id == @user.id%>
+		<%= link_to "Edit Profile", edit_user_registration_path(current_user), :class => "btn btn-info btn-lg btn-block" %>
+	<%end%>
+	<br>
+	<div class= "profile_data">
+		<div class="table-responsive table-striped">
+		  <table class="table">
+		    <tr> 
+		    	<td>Full Name</td>
+		    	<td><%= @user.first_name.capitalize + " " + @user.last_name.capitalize%></td>
+		    </tr>
+		    <tr> 
+		    	<td>Email</td>
+		    	<td><%= @user.email %></td>
+		    </tr>
+		    <tr> 
+		    	<td>Phone</td>
+		    	<td><%= @user.phone_num %></td>
+		    </tr>
+		    <tr> 
+		    	<td>Gender</td>
+		    	<td><%= @user.gender %></td>
+		    </tr>
+		    <tr> 
+		    	<td>Hometown</td>
+		    	<td><%= @user.hometown %></td>
+		    </tr>
+		    <tr> 
+		    	<td>Marital status</td>
+		    	<td><%= @user.marital_status %></td>
+		    </tr>
+		    <%if User.is_friend(@user, current_user) || @user.id == current_user.id %>
+		    	<tr> 
+			    	<td>Birthdate</td>
+			    	<td><%= @user.birthdate %></td>
+			    </tr>
+			    <tr> 
+			    	<td>About</td>
+			    	<td><%= @user.about %></td>
+			    </tr>
+
+
+		    <%end%>
+		  </table>
+		</div> 
 	</div>
-	<%= link_to "Edit Profile", edit_user_registration_path(current_user), :class => "btn btn-default" %>
-	<%= link_to "Friends",  friend_list_friendables_path, :class => "btn btn-default"%>
+
+   </div>
+  <div class="col-md-8">
+  	<%= render 'posts/form'%>
+  	<%if @posts%>
+	  	<% @posts.each do |post|%>
+	  		<%= render 'posts/post', :post => post%>
+	  		<br>
+	  	<%end%>
+	<%else%>
+		<p>No posts to show.</p>
+	<%end%>
+  </div> 
 </div>
+<style type="text/css">
+	.user_avatar{
+		width: 200;
+		height: 200;
+	}
+	.picture_frame, .profile_data{
+		border: 1px solid black;
+	}
+
+</style>
