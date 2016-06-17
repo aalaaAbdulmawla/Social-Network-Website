@@ -1,0 +1,9 @@
+<%= form_tag ({:controller => "posts", :action => "create"}), multipart: true do %>
+  <div class="form-group">
+    <%= label_tag 'Update status' %><br>
+    <%= text_area_tag "post[content]", nil, placeholder: "What 's on your mind?", class: 'form-control'%> <br>
+    <%= file_field_tag "post[attachment]" %>
+    <%= select_tag "post[is_public]", options_for_select(["Public", "Private"]), :class => 'genForm_dropBox' %>
+  </div>
+  <%= submit_tag :post, class: 'btn btn-primary'%>
+<% end %>

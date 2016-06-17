@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
   has_many :friendables
   has_many :users, through: :friendables
+  has_many :posts
   
   after_create :set_default_url!
   # around_update :set_default_url!

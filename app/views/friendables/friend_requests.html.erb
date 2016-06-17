@@ -1,0 +1,17 @@
+<div class="col-md-8 col-md-offset-2">
+  <h2 class="text-center">Friend Requests</h2>
+  <table class="table table-striped">
+    <% @frnds.each do |friend| %>
+      <tr>
+      	<td class="profile-pic"><%= link_to image_tag((User.find(friend.id)).avatar_url, 
+      							:title => friend.first_name.capitalize, 
+      							:alt => friend.first_name.capitalize), 
+      							user_path(friend)%>
+           </td>
+          <td><%= link_to truncate(friend.first_name.capitalize + " " + friend.last_name.capitalize, :length => 16), user_path(friend) %></td>
+        <td> <%= link_to "Accept", :controller => "friendables", :action => "friend_request_accept", :id => friend.id, :class => "btn btn-success" %> </td>
+      	<td> <%= link_to "Reject", :controller => "friendables", :action => "friend_request_reject" ,:id => friend.id, :class => "btn btn-danger" %> </td>
+      <tr>
+    <% end %>
+  </table>
+</div>

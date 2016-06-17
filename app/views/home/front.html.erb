@@ -1,5 +1,6 @@
- <div class="hero-unit">
-    <h1>Hello, world!</h1>
-    <p>........................</p>
-    <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<%if user_signed_in? %>
+  <%= render 'posts/form'%>
+  <%= render 'posts/index'%>
+<%else%>
+   <%= render 'home/welcome_page'%>
+<%end%>

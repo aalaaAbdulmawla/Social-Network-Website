@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :posts
+
   root 'home#front'
   resources :friendables do
       get 'friend_request', :on => :member
