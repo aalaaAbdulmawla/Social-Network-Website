@@ -16,7 +16,4 @@ class ApplicationController < ActionController::Base
     						    :hometown, :marital_status, :about]
     devise_parameter_sanitizer.for(:sign_in) << [:email, :remember_me]
   end
-
- 
-
 end

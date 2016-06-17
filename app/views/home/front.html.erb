@@ -1,5 +1,6 @@
 <%if user_signed_in? %>
-  <%= render 'posts/form'%>
+  <div> <%= render 'search/form'%> </div> <br>
+  <div> <%= render 'posts/form'%> </div>
   <%= render 'posts/index'%>
 <%else%>
    <%= render 'home/welcome_page'%>

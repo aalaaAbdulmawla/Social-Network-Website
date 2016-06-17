@@ -7,17 +7,10 @@
         <li class="active">
           <%= link_to "Home", root_path%>
         </li>
-        <li><%= link_to "(#{Friendable.count_friend_requests(current_user)}) Friends Requests", 
-        :controller => "friendables", :action => "friend_requests"%></li>
+        <li><%= link_to "(#{Friendable.count_friend_requests(current_user)}) Friends Requests",friend_requests_friendables_path%></li>
         <li><%= link_to "Friends",  friend_list_friendables_path%></li>
         <li><a href="#">Notifications</a></li>
       </ul>
-
-
-      <%= form_tag url_for(:controller=>"search", :action=>"index"), :method => :get, :class => "navbar-form pull-left", :id=>"navBarSearchForm" do %>
-        <%= text_field_tag :search,nil ,:class => "span2", :placeholder => "Search friends or your posts" %>
-        <%= submit_tag "Search", :class => 'btn btn-info'%>
-      <% end %>
 
        <ul class="nav navbar-nav navbar-right">     
           <li id="profile-pic"><%= link_to image_tag(current_user.avatar_url, :title => current_user.first_name.capitalize, :alt => current_user.first_name.capitalize), url_for(current_user),
