@@ -11,5 +11,6 @@ class Post < ActiveRecord::Base
   end
 
   mount_uploader :attachment, AvatarUploader
+  acts_as_votable
 
 end

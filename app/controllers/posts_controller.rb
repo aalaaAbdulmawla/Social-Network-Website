@@ -3,6 +3,18 @@ class PostsController < ApplicationController
 
   respond_to :html
 
+  def upvote 
+    @post = Post.find(params[:id])
+    @post.upvote_by current_user
+    redirect_to :back
+  end  
+
+  def downvote
+    @post = Post.find(params[:id])
+    @post.downvote_by current_user
+    redirect_to :back
+  end
+
   def index
     @posts = Post.find_posts(current_user)
     respond_with(@posts)

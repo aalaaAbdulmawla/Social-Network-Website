@@ -8,6 +8,8 @@
       <th>Is public</th>
       <th>User</th>
       <td>Posted Time</td>
+      <td>Upvote</td>
+      <td>Downvote</td>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,10 +22,26 @@
         <td><%= post.is_public.to_s %></td>
         <td><%= post.user.id %></td>
         <td><%= post.created_at.localtime.strftime("%d/%m/%y: %H:%M:%S")%></td>
+        <td> 
+          <%= link_to like_post_path(post), method: :put do %>
+            Upvote
+            <%= post.get_upvotes.size %>
+          <% end %>
+        </td>
+        <td> 
+          <%= link_to dislike_post_path(post), method: :put do %>
+            Downvote
+            <%= post.get_downvotes.size %>
+          <% end %>
+
+        </td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+     
+
+     
     <% end %>
   </tbody>
 </table>

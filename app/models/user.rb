@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :users, through: :friendables
   has_many :posts
   
+  acts_as_voter
   after_create :set_default_url!
   # around_update :set_default_url!
 
