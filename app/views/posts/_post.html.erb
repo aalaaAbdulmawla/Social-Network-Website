@@ -9,7 +9,7 @@
 				<div class="col-md-2"><%= post.is_public %></div>
 			</div>
 			<div class="row">
-				<div class="col-md-12"><%= post.created_at %></div>
+				<div class="col-md-12"><%= post.created_at.localtime %></div>
 			</div>
 			<p class="line"></p>
 			<div class="row">
