@@ -11,8 +11,9 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require rails_emoji_picker
+ *= require bootstrap
  *= require_self
-
  */
     input[type=text]{
    	width:89.5% !important; 

@@ -31,6 +31,7 @@ gem 'devise'
 #gem "acts_as_follower"
 gem 'acts_as_votable', '~> 0.10.0'
 gem "twitter-bootstrap-rails"
+gem 'rails_emoji_picker'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

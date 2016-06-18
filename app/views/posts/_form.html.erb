@@ -13,9 +13,11 @@
 
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_field :content %>
+    <p class="emoji-picker-container">
+      <%= f.text_field :content, class: 'form-control', data: { emojiable: true } %>
+    </p>
   </div>
-
+ 
   <div class="field">
 	  <% if @post.attachment.url.present? %>
 	    <%= image_tag(@post.attachment.url) %>
