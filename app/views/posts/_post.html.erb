@@ -1,0 +1,72 @@
+<div class = "post">
+	<div class="row">
+		<div class="col-md-2">
+			<%= link_to image_tag(default_img(User.find(post.user_id))) , url_for(User.find(post.user_id)),
+	          :html=>{:class => "poster_avatar"} %></div>
+		<div class="col-md-10">
+			<div class="row">
+				<div class="col-md-10"><%= link_to full_name(User.find(post.user_id)), url_for(User.find(post.user_id))%></div>
+				<div class="col-md-2"><%= post.is_public %></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12"><%= post.created_at %></div>
+			</div>
+			<p class="line"></p>
+			<div class="row">
+				<div class="col-md-12"> <%= post.content %> </div>
+			</div>
+		</div>
+	</div>
+	<% if post.attachment_url%>
+		<div class="row attachment_pic">
+			<br>
+			<%= image_tag post.attachment_url %>
+		</div>
+	<%end%>
+	<br>
+	<div class="row">
+		<div class="col-md-3">
+			<%= link_to "(#{post.get_upvotes.size}) Like", like_post_path(post), method: :put,
+			:class => "btn btn-primary btn-sm",
+			:disabled => ((current_user.voted_for? post) && (current_user.voted_up_on? post)) %>
+
+
+			<%= link_to "(#{post.get_downvotes.size}) Dislike", dislike_post_path(post), method: :put,
+			:class => "btn btn-danger btn-sm", 
+			:disabled => ((current_user.voted_for? post) && (current_user.voted_down_on? post)) %>
+		</div>
+		<div class="col-md-5"></div>
+		<div class="col-md-4">
+			<%= link_to 'Show', post, :class => "btn btn-primary btn-sm" %>
+			<%if current_user.id == post.user_id%>
+				<%= link_to 'Edit', edit_post_path(post),:class => "btn btn-info btn-sm" %>			
+				<%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },
+				:class => "btn btn-danger btn-sm" %>
+			<%end%>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.post{
+		width: 100%;
+		border: 1px solid gray;
+		padding: 2px;
+	}
+	.line{
+		border-top: 1px solid gray;
+	}
+	.attachment_pic img{
+		width: 400;
+		height: 50;
+	}
+	.attachment_pic img
+	{
+	  display: block;
+	  margin-left: auto;
+	   margin-right: auto; 
+	    margin: 0 auto;
+	}
+
+
+</style>

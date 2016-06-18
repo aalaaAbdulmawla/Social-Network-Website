@@ -1,0 +1,29 @@
+<%= form_for(@friendable) do |f| %>
+  <% if @friendable.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@friendable.errors.count, "error") %> prohibited this friendable from being saved:</h2>
+
+      <ul>
+      <% @friendable.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :from_id %><br>
+    <%= f.number_field :from_id %>
+  </div>
+  <div class="field">
+    <%= f.label :to_id %><br>
+    <%= f.number_field :to_id %>
+  </div>
+  <div class="field">
+    <%= f.label :accepted %><br>
+    <%= f.number_field :accepted %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
