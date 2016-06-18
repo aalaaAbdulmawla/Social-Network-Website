@@ -3,7 +3,7 @@
   <table class="table table-striped">
     <% @frnds.each do |friend| %>
       <tr>
-      	<td class="profile-pic"><%= link_to image_tag((User.find(friend.id)).avatar_url, 
+      	<td class="profile-pic"><%= link_to image_tag(default_img(User.find(friend.id))), 
       							:title => friend.first_name.capitalize, 
       							:alt => friend.first_name.capitalize), 
       							user_path(friend)%>

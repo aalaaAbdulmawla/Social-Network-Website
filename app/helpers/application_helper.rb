@@ -1,8 +1,8 @@
 module ApplicationHelper
 	def default_img(user)
 	  if user.avatar_url.nil?
-	  	if (user.gender = "Male")
-	   		 "Male.PNG"
+	  	if (user.gender == "Male")
+	   		 "male.PNG"
 	    else
 	    	"female.PNG"
 	    end

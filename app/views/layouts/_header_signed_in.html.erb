@@ -13,7 +13,7 @@
       </ul>
 
        <ul class="nav navbar-nav navbar-right">     
-          <li id="profile-pic"><%= link_to image_tag(current_user.avatar_url, :title => current_user.first_name.capitalize, :alt => current_user.first_name.capitalize), url_for(current_user),
+          <li id="profile-pic"><%= link_to image_tag(default_img(current_user), :title => current_user.first_name.capitalize, :alt => current_user.first_name.capitalize), url_for(current_user),
           :html=>{:width=>10, :height => 10} %>
           </li>
           <li><%= link_to truncate(current_user.first_name, :length => 16), current_user %></li>
