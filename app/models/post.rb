@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+  validate :any_present?
+
 
   def self.find_posts(user)
   	Post.find_by_sql("SELECT * FROM posts where is_public = 'Public'
@@ -15,5 +17,12 @@ class Post < ActiveRecord::Base
 
   mount_uploader :attachment, AvatarUploader
   acts_as_votable
+
+  private
+    def any_present?
+      if content.blank? and attachment.blank?
+        errors.add :base, "You must fill in at least one field"
+      end
+    end
 
 end

@@ -1,20 +1,37 @@
-<div class="row form-group">
-	<%= form_tag ({:controller => "posts", :action => "create"}), multipart: true do %>
-	    <%= label_tag 'Update status' %><br>
-	    <%= text_area_tag "post[content]", nil, placeholder: "What 's on your mind?", class: 'form-control'%> <br>
-	    <div class="col-md-4"><%= file_field_tag "post[attachment]" %> </div>
-	    <div class="col-md-4">
-	    	<%= select_tag "post[is_public]", options_for_select(["Public", "Private"]), :class => 'genForm_dropBox' %>
-	    </div>
-	    <div class="col-md-4"><%= submit_tag :post, class: 'btn btn-primary btn-lg btn-block'%> </div>
-	<% end %>
-</div>
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-<style type="text/css">
-	.form-group{
-		border: 1px solid gray;
-		padding: 5px;
-	}
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_field :content %>
+  </div>
 
-</style>
+  <div class="field">
+	  <% if @post.attachment.url.present? %>
+	    <%= image_tag(@post.attachment.url) %>
+	    <%= f.label :remove_attachment do %>
+	      remove_attachment : <%= f.check_box :remove_attachment %>
+	    <% end %>
+	  <% end %>
+	  <%= f.file_field :attachment %>
+	  <%= f.hidden_field :attachment %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_public %><br>
+    <%= f.text_field :is_public %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

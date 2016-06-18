@@ -20,5 +20,7 @@
   <%= @post.user %>
 </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%if current_user.id == @post.user_id%>
+	<%= link_to 'Edit', edit_post_path(@post) %>
+<%end%>
+

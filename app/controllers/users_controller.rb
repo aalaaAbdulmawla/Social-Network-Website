@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 	# def friend_requests
 	# 	@frnds =  User.find_friend_requests(current_user)
 	# end
+	
 
 	def show
  		 @user = User.find(params[:id])
@@ -53,4 +54,6 @@ class UsersController < ApplicationController
 	#   end
 	#  	 redirect_to :controller => "users", :action => "friend_requests"
 	# end
+
+	
 end

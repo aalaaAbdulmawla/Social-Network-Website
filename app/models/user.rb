@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, ImageUploader
+  after_save :edit_pic_post, if: :avatar_changed?
 
   #validations
-  validates :first_name,:last_name, :email, :gender,  presence: true
+  validates :first_name,:last_name, :email, :gender, :birthdate,  presence: true
   validates :first_name,:last_name, :email, :hometown,  length: { maximum: 100 }
   validates :about , length: {maximum: 500}
   validates :avatar_url, allow_blank: true, format:{
@@ -66,6 +67,17 @@ class User < ActiveRecord::Base
   # def self.accept_friend(sender, recevier)
   #   Follow.find_by_sql("UPDATE follows SET status = 1 WHERE follower_id = #{sender.id} AND followable_id = #{recevier.id}")
  # end
+
+ private
+
+    def edit_pic_post
+      if self.avatar_url
+        Post.new(:attachment => Pathname.new(self.avatar.path).open,
+                 :content => "User #{self.first_name} changed their profile picture",
+                 :is_public => 'Private',
+                 :user_id => self.id ).save
+      end
+    end
   
 
 end

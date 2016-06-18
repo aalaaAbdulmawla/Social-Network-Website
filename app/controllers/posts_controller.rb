@@ -3,6 +3,8 @@ class PostsController < ApplicationController
 
   respond_to :html
 
+  before_action :permit_user, only: [:edit, :destroy]
+
   def upvote 
     @post = Post.find(params[:id])
     @post.upvote_by current_user
@@ -50,7 +52,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    respond_with(@post)
+    redirect_to :back
   end
 
   private
@@ -60,5 +62,11 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:attachment, :content, :is_public, :user_id)
+    end
+
+    def permit_user
+      if (current_user.id != @post.user_id)
+        redirect_to :back, :notice => "Can not edit/delete this post."
+      end
     end
 end

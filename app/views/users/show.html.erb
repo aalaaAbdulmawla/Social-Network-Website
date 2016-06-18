@@ -63,7 +63,7 @@
    </div>
   <div class="col-md-8">
   	<%= render 'search/form'%>
-  	<%= render 'posts/form'%>
+  	<%= render 'posts/new_form'%>
   	<%if @posts%>
 	  	<% @posts.each do |post|%>
 	  		<%= render 'posts/post', :post => post%>
