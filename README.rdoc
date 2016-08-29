@@ -1,28 +1,13 @@
-== README
+Social network website where users can:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Send friend requests
 
-Things you may want to cover:
+* Post a status update
 
-* Ruby version
+* See thier friends posts
 
-* System dependencies
+* Vote, comment or add emojies on posts
 
-* Configuration
+Ruby version = ruby 2.3.0
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Rails version = 4.2.6
